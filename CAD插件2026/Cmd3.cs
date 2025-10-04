@@ -11,6 +11,9 @@ using CADApp = Autodesk.AutoCAD.ApplicationServices.Application;
 
 namespace CAD插件2026
 {
+    /// <summary>
+    /// 背景颜色及主题颜色切换（黑/白）
+    /// </summary>
     public class Cmd3
     {
         [CommandMethod("Cmd3")]
