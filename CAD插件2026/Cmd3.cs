@@ -19,6 +19,16 @@ namespace CAD插件2026
         [CommandMethod("Cmd3")]
         public static void Command()
         {
+            // 需要添加对应版本的包引用（AutoCAD.NET.Interop）
+            // CAD2018 R22.0
+            // CAD2019 R23.0
+            // CAD2020 R23.1
+            // CAD2021 R24.0
+            // CAD2022 R24.1
+            // CAD2023 R24.2
+            // CAD2024 R24.3
+            // CAD2025 R25.0
+            // CAD2026 R25.1
             AcadPreferences preferences = (AcadPreferences)CADApp.Preferences;
             uint now = preferences.Display.GraphicsWinModelBackgrndColor;
             
