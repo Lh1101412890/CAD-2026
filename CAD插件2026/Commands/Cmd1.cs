@@ -1,6 +1,6 @@
 ﻿using Autodesk.AutoCAD.Runtime;
 
-namespace CAD插件2026
+namespace CAD插件2026.Commands
 {
     public class Cmd1
     {

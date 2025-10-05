@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Autodesk.AutoCAD.Interop;
+﻿using Autodesk.AutoCAD.Interop;
 using Autodesk.AutoCAD.Runtime;
 
 using CADApp = Autodesk.AutoCAD.ApplicationServices.Application;
 
-namespace CAD插件2026
+namespace CAD插件2026.Commands
 {
     /// <summary>
     /// 背景颜色及主题颜色切换（黑/白）
@@ -31,17 +25,17 @@ namespace CAD插件2026
             // CAD2026 R25.1
             AcadPreferences preferences = (AcadPreferences)CADApp.Preferences;
             uint now = preferences.Display.GraphicsWinModelBackgrndColor;
-            
+
             //16进制的RGB颜色值，前两位为00，然后是R、G、B值
             if (now == 0x00000000)
             {
-                CADApp.SetSystemVariable("COLORTHEME", 1);
+                Autodesk.AutoCAD.ApplicationServices.Core.Application.SetSystemVariable("COLORTHEME", 1);
                 preferences.Display.GraphicsWinModelBackgrndColor = 0x00ffffff; //白色
                 preferences.Display.GraphicsWinLayoutBackgrndColor = 0x00ffffff; //白色
             }
             else
             {
-                CADApp.SetSystemVariable("COLORTHEME", 0);
+                Autodesk.AutoCAD.ApplicationServices.Core.Application.SetSystemVariable("COLORTHEME", 0);
                 preferences.Display.GraphicsWinModelBackgrndColor = 0x00000000; //黑色
                 preferences.Display.GraphicsWinLayoutBackgrndColor = 0x00000000; //黑色
             }

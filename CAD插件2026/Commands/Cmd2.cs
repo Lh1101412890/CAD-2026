@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Autodesk.AutoCAD.ApplicationServices;
+﻿using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 
-namespace CAD插件2026
+namespace CAD插件2026.Commands
 {
     // 读取“模型空间”块表记录
     public class Cmd2
@@ -16,7 +10,7 @@ namespace CAD插件2026
         [CommandMethod("Cmd2")]
         public static void Command()
         {
-            Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
 
             // 读取和写入数据都需要开启事务
