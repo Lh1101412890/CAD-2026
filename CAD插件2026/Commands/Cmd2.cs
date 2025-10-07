@@ -2,6 +2,8 @@
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 
+using CADApp = Autodesk.AutoCAD.ApplicationServices.Application;
+
 namespace CAD插件2026.Commands
 {
     // 读取“模型空间”块表记录
@@ -10,7 +12,7 @@ namespace CAD插件2026.Commands
         [CommandMethod("Cmd2")]
         public static void Command()
         {
-            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
+            Document document = CADApp.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
 
             // 读取和写入数据都需要开启事务

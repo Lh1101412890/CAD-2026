@@ -13,7 +13,7 @@ namespace CAD插件2026.Commands
         [CommandMethod("ReadLine")]
         public static void ReadALine()
         {
-            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
+            Document document = CADApp.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
             using Transaction transaction = database.TransactionManager.StartTransaction();
             BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
