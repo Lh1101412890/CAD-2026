@@ -21,8 +21,7 @@ namespace CAD插件2026.Commands
                 EndPoint = new Point3d(100, 100, 0)
             };
 
-            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
-
+            Document document = CADApp.DocumentManager.MdiActiveDocument;
             document.Drawing(line);
         }
     }
