@@ -32,7 +32,7 @@ namespace CAD插件2026.Commands
             //}
             //editor.WriteMessage(promptPointResult.Value.ToString());
 
-            PromptKeywordOptions options = new PromptKeywordOptions("请选择模式[模式1(1)/模式2(2)/取消(U)]")
+            PromptKeywordOptions options = new("请选择模式[模式1(1)/模式2(2)/取消(U)]")
             {
                 AppendKeywordsToMessage = true
             };
