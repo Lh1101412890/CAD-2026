@@ -21,7 +21,6 @@ namespace CAD插件2026.Extension
             modelSpace.AppendEntity(entity);
             // 通知事务管理器有一个新对象被创建
             transaction.AddNewlyCreatedDBObject(entity, true);
-            entity.Dispose();
             transaction.Commit();
         }
 
@@ -40,7 +39,6 @@ namespace CAD插件2026.Extension
             {
                 modelSpace.AppendEntity(item);
                 transaction.AddNewlyCreatedDBObject(item, true);
-                item.Dispose();
             }
             transaction.Commit();
         }

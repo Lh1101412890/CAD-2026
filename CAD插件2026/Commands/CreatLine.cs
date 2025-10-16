@@ -14,13 +14,13 @@ namespace CAD插件2026.Commands
     {
         private static Point3d start = default;
         private static Point3d last = default;
-        private List<Line> Lines;
+
         [CommandMethod(nameof(CreatLine))]
         public static void Command()
         {
             Document document = CADApp.DocumentManager.MdiActiveDocument;
             Editor editor = document.Editor;
-            PromptPointOptions options1 = new PromptPointOptions("\n指定第一个点");
+            PromptPointOptions options1 = new("\n指定第一个点");
             if (last == default)
             {
                 options1.AllowNone = false;
@@ -40,12 +40,12 @@ namespace CAD插件2026.Commands
             }
             start = result1.Value;
 
-            JigPromptPointOptions jigPromptPoint1 = new JigPromptPointOptions("\n指定下一点或[放弃(U)]：")
+            JigPromptPointOptions jigPromptPoint1 = new("\n指定下一点或[放弃(U)]：")
             {
                 AppendKeywordsToMessage = false,
             };
             jigPromptPoint1.Keywords.Add("U");
-            JigPromptPointOptions jigPromptPoint2 = new JigPromptPointOptions("\n指定下一点或[闭合(C)/放弃(U)]：")
+            JigPromptPointOptions jigPromptPoint2 = new("\n指定下一点或[闭合(C)/放弃(U)]：")
             {
                 AppendKeywordsToMessage = false,
             };
@@ -76,7 +76,7 @@ namespace CAD插件2026.Commands
                 }
                 if (promptResult.StringResult == "C")
                 {
-                    Line lastLine = new Line(currentStart, start);
+                    Line lastLine = new(currentStart, start);
                     document.Drawing(lastLine);
                     lastLine.Dispose();
                     last = start;
@@ -88,15 +88,13 @@ namespace CAD插件2026.Commands
                 last = lineJig.end;
                 currentStart = lineJig.end;
                 i++;
-               
             }
-
         }
     }
 
     public class LineJig : EntityJig
     {
-        private JigPromptPointOptions options;
+        private readonly JigPromptPointOptions options;
         public Point3d end;
         public LineJig(Point3d start, JigPromptPointOptions options) : base(new Line())
         {
