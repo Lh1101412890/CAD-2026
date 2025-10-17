@@ -95,9 +95,11 @@ namespace CAD插件2026.Commands
     public class LineJig : EntityJig
     {
         private readonly JigPromptPointOptions options;
+        private Point3d start;
         public Point3d end;
         public LineJig(Point3d start, JigPromptPointOptions options) : base(new Line())
         {
+            this.start = start;
             (this.Entity as Line).StartPoint = start;
             (this.Entity as Line).EndPoint = start;
             this.options = options;
@@ -110,8 +112,23 @@ namespace CAD插件2026.Commands
             {
                 return SamplerStatus.NoChange;
             }
-           (this.Entity as Line).EndPoint = promptPointResult.Value;
-            end = promptPointResult.Value;
+
+            //(this.Entity as Line).EndPoint = promptPointResult.Value;
+            //end = promptPointResult.Value;
+            Database database = CADApp.DocumentManager.MdiActiveDocument.Database;
+            if (database.Orthomode)
+            {
+                //相应正交模式
+                Point3d value = promptPointResult.Value;
+                end = Math.Abs(value.X - start.X) < Math.Abs(value.Y - start.Y)
+                    ? new Point3d(start.X, promptPointResult.Value.Y, promptPointResult.Value.Z)
+                    : new Point3d(promptPointResult.Value.X, start.Y, promptPointResult.Value.Z);
+            }
+            else
+            {
+                end = promptPointResult.Value;
+            }
+
             return SamplerStatus.OK;
         }
 
