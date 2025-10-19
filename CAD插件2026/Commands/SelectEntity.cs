@@ -21,38 +21,40 @@ namespace CAD插件2026.Commands
             {
                 MessageForAdding = "请选择直线"
             };
-
-            TypedValue[] typedValues = new TypedValue[]
+            TypedValue[] values = new TypedValue[]
             {
                 new TypedValue((int)DxfCode.Operator,"<or"),
                 new TypedValue((int)DxfCode.Operator,"<and"),
                 new TypedValue((int)DxfCode.Start,"line"),
                 new TypedValue((int)DxfCode.Color,"1"),
+                //new TypedValue((int)DxfCode.LayerName,"Li"),
                 new TypedValue((int)DxfCode.Operator,"and>"),
                 new TypedValue((int)DxfCode.Start,"lwpolyline"),
+
                 new TypedValue((int)DxfCode.Operator,"<and"),
                 new TypedValue((int)DxfCode.Start,"text"),
                 new TypedValue((int)DxfCode.Text,"`*Li*"),
                 new TypedValue((int)DxfCode.Operator,"and>"),
-                new TypedValue((int)DxfCode.Operator,"or>"),
 
+                new TypedValue((int)DxfCode.Operator,"or>"),
             };
-            SelectionFilter filter = new SelectionFilter(typedValues);
-            PromptSelectionResult promptSelectionResult = editor.GetSelection(options, filter);
-            if (promptSelectionResult.Status != PromptStatus.OK)
+            SelectionFilter filter = new SelectionFilter(values);
+            PromptSelectionResult result = editor.GetSelection(options, filter);
+            if (result.Status != PromptStatus.OK)
             {
-                editor.WriteMessage("\nNo entities selected.");
                 return;
             }
-            foreach (SelectedObject item in promptSelectionResult.Value)
+            foreach (SelectedObject item in result.Value)
             {
-                using (Transaction transaction = database.TransactionManager.StartTransaction())
+                using (Transaction tr = database.TransactionManager.StartTransaction())
                 {
                     DBObject dBObject = item.ObjectId.GetObject(OpenMode.ForRead);
                     editor.WriteMessage("\n" + dBObject.GetType().ToString());
-                    transaction.Commit();
+                    tr.Commit();
                 }
             }
+            editor.SelectAll();
+            
         }
     }
 }
