@@ -1,7 +1,6 @@
 ﻿using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 
 using CADApp = Autodesk.AutoCAD.ApplicationServices.Application;
@@ -10,7 +9,7 @@ namespace CAD插件2026.Commands
 {
     public class SelectEntity
     {
-        [CommandMethod(nameof(SelectEntity))]
+        [CommandMethod(nameof(SelectEntity), CommandFlags.UsePickSet | CommandFlags.NoPaperSpace | CommandFlags.NoBlockEditor)]
         public static void Command()
         {
             Document document = CADApp.DocumentManager.MdiActiveDocument;
@@ -53,8 +52,8 @@ namespace CAD插件2026.Commands
                     tr.Commit();
                 }
             }
-            editor.SelectAll();
-            
+            //editor.SelectAll();
+
         }
     }
 }
