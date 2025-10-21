@@ -16,28 +16,28 @@ namespace CAD插件2026.Commands
             Editor editor = document.Editor;
             Database database = document.Database;
 
-            PromptSelectionOptions options = new PromptSelectionOptions()
+            PromptSelectionOptions options = new()
             {
                 MessageForAdding = "请选择直线"
             };
-            TypedValue[] values = new TypedValue[]
-            {
-                new TypedValue((int)DxfCode.Operator,"<or"),
-                new TypedValue((int)DxfCode.Operator,"<and"),
-                new TypedValue((int)DxfCode.Start,"line"),
-                new TypedValue((int)DxfCode.Color,"1"),
+            TypedValue[] values =
+            [
+                new((int)DxfCode.Operator,"<or"),
+                new((int)DxfCode.Operator,"<and"),
+                new((int)DxfCode.Start,"line"),
+                new((int)DxfCode.Color,"1"),
                 //new TypedValue((int)DxfCode.LayerName,"Li"),
-                new TypedValue((int)DxfCode.Operator,"and>"),
-                new TypedValue((int)DxfCode.Start,"lwpolyline"),
+                new((int)DxfCode.Operator,"and>"),
+                new((int)DxfCode.Start,"lwpolyline"),
 
-                new TypedValue((int)DxfCode.Operator,"<and"),
-                new TypedValue((int)DxfCode.Start,"text"),
-                new TypedValue((int)DxfCode.Text,"`*Li*"),
-                new TypedValue((int)DxfCode.Operator,"and>"),
+                new((int)DxfCode.Operator,"<and"),
+                new((int)DxfCode.Start,"text"),
+                new((int)DxfCode.Text,"`*Li*"),
+                new((int)DxfCode.Operator,"and>"),
 
-                new TypedValue((int)DxfCode.Operator,"or>"),
-            };
-            SelectionFilter filter = new SelectionFilter(values);
+                new((int)DxfCode.Operator,"or>"),
+            ];
+            SelectionFilter filter = new(values);
             PromptSelectionResult result = editor.GetSelection(options, filter);
             if (result.Status != PromptStatus.OK)
             {
@@ -45,12 +45,10 @@ namespace CAD插件2026.Commands
             }
             foreach (SelectedObject item in result.Value)
             {
-                using (Transaction tr = database.TransactionManager.StartTransaction())
-                {
-                    DBObject dBObject = item.ObjectId.GetObject(OpenMode.ForRead);
-                    editor.WriteMessage("\n" + dBObject.GetType().ToString());
-                    tr.Commit();
-                }
+                using Transaction tr = database.TransactionManager.StartTransaction();
+                DBObject dBObject = item.ObjectId.GetObject(OpenMode.ForRead);
+                editor.WriteMessage("\n" + dBObject.GetType().ToString());
+                tr.Commit();
             }
             //editor.SelectAll();
 

@@ -19,7 +19,7 @@ namespace CAD插件2026.Commands
             Editor editor = document.Editor;
             Database database = document.Database;
 
-            DBPoint dBPoint = new DBPoint(new Point3d(1, 1, 0));
+            DBPoint dBPoint = new(new Point3d(1, 1, 0));
             document.Drawing(dBPoint);
             using (Transaction transaction = database.TransactionManager.StartTransaction())
             {
@@ -29,11 +29,11 @@ namespace CAD插件2026.Commands
             }
             dBPoint.Dispose();
 
-            Polyline polyline = new Polyline();
-            Point2d point1 = new Point2d(0, 0);
-            Point2d point2 = new Point2d(100, 0);
-            Point2d point3 = new Point2d(100, 100);
-            Point2d point4 = new Point2d(0, 100);
+            Polyline polyline = new();
+            Point2d point1 = new(0, 0);
+            Point2d point2 = new(100, 0);
+            Point2d point3 = new(100, 100);
+            Point2d point4 = new(0, 100);
             polyline.AddVertexAt(0, point1, 0, 0, 0);
             polyline.AddVertexAt(1, point2, 0, 0, 0);
             polyline.AddVertexAt(2, point3, 0, 0, 0);
@@ -48,8 +48,8 @@ namespace CAD插件2026.Commands
                 polyline.RemoveVertexAt(1);
                 transaction.Commit();
             }
-            double length = polyline.Length;
-            double area = polyline.Area;
+            double _1 = polyline.Length;
+            double _2 = polyline.Area;
 
             if (polyline.Bounds.HasValue)
             {
