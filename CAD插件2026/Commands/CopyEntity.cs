@@ -20,7 +20,7 @@ namespace CAD插件2026.Commands
             BlockTableRecord currentModel = tr1.GetObject(bt1[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
 #if true
-            // 创建一个新的数据库并从文件中读取图形数据到collection
+            // 跨文件复制对象
             ObjectIdCollection collection;
             using Database d1_DB = new(false, true);
             d1_DB.ReadDwgFile("D:\\OneDrive\\编程\\C#CAD二次开发\\Drawing1.dwg", FileOpenMode.OpenForReadAndReadShare, true, "");
@@ -33,12 +33,11 @@ namespace CAD插件2026.Commands
                 tr2.Commit();
             }
 
-            // 将collection中的对象克隆到当前数据库的modelSpace中
             IdMapping mapping = [];
             currentDatabase.WblockCloneObjects(collection, currentModel.ObjectId, mapping, DuplicateRecordCloning.Ignore, false);
             tr1.Commit();
 #else
-            // 直接从当前数据库的modelSpace中复制对象
+            // 当前数据库中复制对象
             List<Entity> entities = new List<Entity>();
             foreach (ObjectId item in currentModel)
             {
