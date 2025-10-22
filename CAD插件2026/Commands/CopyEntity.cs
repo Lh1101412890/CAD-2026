@@ -19,7 +19,7 @@ namespace CAD插件2026.Commands
             var bt1 = tr1.GetObject(currentDatabase.BlockTableId, OpenMode.ForRead) as BlockTable;
             BlockTableRecord currentModel = tr1.GetObject(bt1[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
-#if true
+#if false
             // 跨文件复制对象
             ObjectIdCollection collection;
             using Database d1_DB = new(false, true);

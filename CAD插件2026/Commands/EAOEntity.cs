@@ -30,7 +30,7 @@ namespace CAD插件2026.Commands
             foreach (ObjectId item in result.Value.GetObjectIds())
             {
                 Entity entity = (Entity)item.GetObject(OpenMode.ForWrite);
-#if true
+#if false
                 // 分解
                 entity.Explode(collection);
                 entity.Erase();
