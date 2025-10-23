@@ -38,7 +38,7 @@ namespace CAD插件2026.Commands
             tr1.Commit();
 #else
             // 当前数据库中复制对象
-            List<Entity> entities = new List<Entity>();
+            List<Entity> entities = [];
             foreach (ObjectId item in currentModel)
             {
                 Entity @object = (Entity)item.GetObject(OpenMode.ForRead);

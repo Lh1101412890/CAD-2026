@@ -29,11 +29,17 @@ namespace CAD插件2026.Commands
 
             // 镜像
             Plane plane = new(Point3d.Origin, Vector3d.XAxis);
-            Matrix3d mirroring = Matrix3d.Mirroring(plane);
+            Matrix3d mirroring1 = Matrix3d.Mirroring(plane);
+
+            Line3d line = new(Point3d.Origin, new Vector3d(1, 1, 1));
+            Line3d _ = new(Point3d.Origin, new Point3d(10, 10, 0));
+            Matrix3d mirroring2 = Matrix3d.Mirroring(line);
+
+            Matrix3d mirroring3 = Matrix3d.Mirroring(Point3d.Origin);
 
             // 旋转
             double angle = (45 / 360.0) * 2 * Math.PI;
-            Matrix3d rotation = Matrix3d.Rotation(angle, Vector3d.XAxis, Point3d.Origin);
+            Matrix3d rotation = Matrix3d.Rotation(angle, Vector3d.ZAxis, Point3d.Origin);
 
             // 缩放
             Matrix3d scale = Matrix3d.Scaling(5, Point3d.Origin);
@@ -45,7 +51,8 @@ namespace CAD插件2026.Commands
             {
                 Entity entity = (Entity)item.GetObject(OpenMode.ForWrite);
                 Entity newEnt = entity.Clone() as Entity;
-                newEnt.TransformBy(mirroring);
+                newEnt.TransformBy(mirroring3);
+                newEnt.GetTransformedCopy(mirroring3);
                 model.AppendEntity(newEnt);
                 tr.AddNewlyCreatedDBObject(newEnt, true);
             }
