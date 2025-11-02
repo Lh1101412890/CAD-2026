@@ -12,6 +12,7 @@ namespace CAD插件2026.Extension
         /// <param name="entity"></param>
         public static void Drawing(this Document document, Entity entity)
         {
+            using DocumentLock documentLock = document.LockDocument();
             Database database = document.Database;
             using Transaction transaction = database.TransactionManager.StartTransaction();
             BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
@@ -31,6 +32,7 @@ namespace CAD插件2026.Extension
         /// <param name="entities"></param>
         public static void Drawing(this Document document, List<Entity> entities)
         {
+            using DocumentLock documentLock = document.LockDocument();
             Database database = document.Database;
             using Transaction transaction = database.TransactionManager.StartTransaction();
             BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
