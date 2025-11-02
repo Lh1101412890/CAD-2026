@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 using Autodesk.Windows;
 
@@ -11,7 +6,9 @@ namespace CAD插件2026.Commands
 {
     public class MyCommand : ICommand
     {
+#pragma warning disable CS0067 //从不使用警告
         public event EventHandler? CanExecuteChanged;
+#pragma warning disable CS0067
 
         public bool CanExecute(object? parameter)
         {

@@ -1,10 +1,7 @@
 ﻿using System.Windows.Media.Imaging;
 
-using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
-
-using CADApp = Autodesk.AutoCAD.ApplicationServices.Application;
 
 namespace CAD插件2026.Commands
 {
@@ -23,25 +20,25 @@ namespace CAD插件2026.Commands
             {
                 return;
             }
-            RibbonTab tab = new RibbonTab
+            RibbonTab tab = new()
             {
                 Title = "我的插件",
                 Id = "MyPluginTab"
             };
             ribbon.Tabs.Add(tab);
-            RibbonPanel panel = new RibbonPanel();
+            RibbonPanel panel = new();
             tab.Panels.Add(panel);
 
-            RibbonPanelSource panelSource = new RibbonPanelSource
+            RibbonPanelSource panelSource = new()
             {
                 Title = "功能区面板",
                 Id = "MyPluginPanel",
             };
             panel.Source = panelSource;
 
-            Uri uri1 = new Uri(@"C:\Users\11014\Downloads\灯泡_小.png");
-            Uri uri2 = new Uri(@"C:\Users\11014\Downloads\灯泡_大.png");
-            RibbonToolTip toolTip = new RibbonToolTip()
+            Uri uri1 = new(@"D:\OneDrive\编程\C#CAD二次开发\灯泡_小.png");
+            Uri uri2 = new(@"D:\OneDrive\编程\C#CAD二次开发\灯泡_大.png");
+            RibbonToolTip toolTip = new()
             {
                 Command = "Command",
                 Content = "这是一个命令",
@@ -49,7 +46,7 @@ namespace CAD插件2026.Commands
                 Title = "命令1",
                 Shortcut = "Cmd"
             };
-            RibbonButton button1 = new RibbonButton
+            RibbonButton button1 = new()
             {
                 Text = "button1",
                 Id = "MyPluginButton",
@@ -63,7 +60,7 @@ namespace CAD插件2026.Commands
                 CommandParameter = "pa",
                 ToolTip = toolTip
             };
-            RibbonButton button2 = new RibbonButton
+            RibbonButton button2 = new()
             {
                 Text = "button2",
                 Id = "MyPluginButton",
