@@ -82,7 +82,7 @@ namespace CAD插件2026.Commands
                 LargeImage = new BitmapImage(uri2),
             };
 
-            RibbonRowPanel rowPanel = new RibbonRowPanel();
+            RibbonRowPanel rowPanel = new();
             rowPanel.Items.Add(button1);
             rowPanel.Items.Add(new RibbonRowBreak());
             rowPanel.Items.Add(button1);
